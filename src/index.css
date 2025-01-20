@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button{
+    @apply font-bold py-1 px-2 rounded-lg shadow-md  bg-purple-600 text-white hover:bg-purple-500;
+}
+
+.wallet-adapter-button {
+    background-color: transparent !important;
+    color: white !important;
+    border-radius: 0.375rem !important; /* Matches rounded-md */
+    padding: 0.5rem 1rem !important; /* Matches px-4 py-2 */
+    font-size: 1rem !important; /* Matches text-base */
+}
+
+.wallet-adapter-button:hover {
+    background-color: rgba(168, 85, 247, 0.2) !important; /* Using !important to override default styles */
+}
