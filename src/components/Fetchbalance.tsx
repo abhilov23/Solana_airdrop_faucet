@@ -6,23 +6,27 @@ const Fetchbalance: FC = () => {
   const [balance, setBalance] = useState(0);
   const { connection } = useConnection();
   const { publicKey } = useWallet();
+
   useEffect(() => {
     const updateBalance = async () => {
       if (!connection || !publicKey) {
         console.error("Wallet not connected or connection unavailable");
+        return;  // Exit if no publicKey or connection
       }
- 
+
       try {
+        // Subscribe to account changes
         connection.onAccountChange(
           publicKey,
-          updatedAccountInfo => {
+          (updatedAccountInfo) => {
             setBalance(updatedAccountInfo.lamports / LAMPORTS_PER_SOL);
           },
-          "confirmed",
+          "confirmed"
         );
+
         // Fetch the account balance using the public key
         const accountInfo = await connection.getAccountInfo(publicKey);
- 
+
         if (accountInfo) {
           setBalance(accountInfo.lamports / LAMPORTS_PER_SOL);
         } else {
@@ -32,13 +36,13 @@ const Fetchbalance: FC = () => {
         console.error("Failed to retrieve account info:", error);
       }
     };
- 
+
     updateBalance();
-  }, [connection, publicKey]);
- 
+  }, [connection, publicKey]); // Only rerun if connection or publicKey changes
+
   return (
     <>
-      <span>{publicKey ? `${balance} SOL` : ""}</span>
+      <span>{publicKey ? `${balance} SOL` : "Connect your wallet to fetch balance"}</span>
     </>
   );
 };

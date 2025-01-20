@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Connection, clusterApiUrl, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { useWallet } from '@solana/wallet-adapter-react';
 
 const Airdrop = ({ token }: { token: number }) => {
